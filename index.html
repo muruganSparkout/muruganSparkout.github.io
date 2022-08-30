@@ -1,1588 +1,393 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Orange County Clerk of Courts Records Search</title>
+	<title>Orange County Clerk of Courts Records Search</title>
 
-    <script src="/bundles/modernizr?v=FkGM2ahQT_s1_lJWOAK4Kuc4JMorI4buRSjs3adTwYk1"></script>
+	<script src="/bundles/modernizr?v=FkGM2ahQT_s1_lJWOAK4Kuc4JMorI4buRSjs3adTwYk1"></script>
 
-    <script src="/bundles/jquery?v=TkDlqp_s0d2tiAP9icV8sgV1IZvimFAK0y7qS5SA8qo1"></script>
+	<script src="/bundles/jquery?v=TkDlqp_s0d2tiAP9icV8sgV1IZvimFAK0y7qS5SA8qo1"></script>
 
-    <link href="/Content/css?v=wq0-XUAkH6Zsm2e5KMMWaw2miWy2tyJ8KacoPflRIs41" rel="stylesheet"/>
+	<link href="/Content/css?v=wq0-XUAkH6Zsm2e5KMMWaw2miWy2tyJ8KacoPflRIs41" rel="stylesheet" />
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78732002-2"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78732002-2"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
         gtag('config', 'UA-78732002-2');
-    </script>
+	</script>
 
-    <script type="text/javascript">
+	<script type="text/javascript">
+		var RootUrl = '/';
 
-        var RootUrl = '/';
+	</script>
+	<style>
+		.footer {
+			margin-top: 25px;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			/*background-color:#b8cbdb;*/
+			background-color: #3175af;
+			border-top: solid 4px #3175af;
+			color: white;
+		}
 
-    </script>
-    <style>
-        .footer {
-            margin-top: 25px;
-            padding-top: 20px;
-            padding-bottom: 20px;
-            /*background-color:#b8cbdb;*/
-            background-color: #3175af;
-            border-top: solid 4px #3175af;
-            color: white;
-        }
+		.footer .panel-title {
+			border-bottom: dotted;
+			border-bottom-color: white;
+			border-bottom-width: 1px;
+			margin-bottom: 10px;
+		}
 
-            .footer .panel-title {
-                border-bottom: dotted;
-                border-bottom-color: white;
-                border-bottom-width: 1px;
-                margin-bottom: 10px;
-            }
+		.footer a,
+		.footer a:visited {
+			color: white;
+		}
 
-            .footer a, .footer a:visited {
-                color: white;
-            }
+		div.skipLink A {
+			position: absolute;
+			width: 0px;
+			height: 0px;
+			overflow: hidden;
+		}
 
-        div.skipLink A {
-            position: absolute;
-            width: 0px;
-            height: 0px;
-            overflow: hidden;
-        }
+		div.skipLink A:focus {
+			transition: width 2s, height 2s;
+			width: auto;
+			height: auto;
+		}
 
-            div.skipLink A:focus {
-                transition: width 2s, height 2s;
-                width: auto;
-                height: auto;
-            }
+		#dropMenu>li.active>a {
+			color: white;
+		}
 
-        #dropMenu > li.active > a {
-            color: white;
-        }
+		h1 image {
+			margin-top: -11px;
+		}
 
-        h1 image {
-            margin-top: -11px;
-        }
+		.in.navbar-collapse {
+			overflow: visible;
+		}
 
-        .in.navbar-collapse {
-            overflow: visible;
-        }
+		.nav-pills>form>li {
+			float: left;
+		}
 
-        .nav-pills > form > li {
-            float: left;
-        }
+		.logo-box {
+			margin-top: 8px;
+			margin-bottom: 5px;
+			padding: 5px;
+		}
 
-        .logo-box {
-            margin-top: 8px;
-            margin-bottom: 5px;
-            padding: 5px;
-        }
+		.nav>form>li {
+			position: relative;
+			display: block;
+		}
 
-        .nav > form > li {
-            position: relative;
-            display: block;
-        }
+		.nav>form>li>a {
+			position: relative;
+			display: block;
+			padding: 10px 15px;
+		}
 
-            .nav > form > li > a {
-                position: relative;
-                display: block;
-                padding: 10px 15px;
-            }
+		.nav>form>li>a:hover {
+			text-decoration: none;
+		}
 
-                .nav > form > li > a:hover {
-                    text-decoration: none;
-                }
+		.bottom-aligned-text {
+			margin-bottom: 0px;
+			vertical-align: bottom;
+		}
 
-        .bottom-aligned-text {
-            margin-bottom: 0px;
-            vertical-align: bottom;
-        }
+		div.c-wrapper {
+			width: 60%;
+			margin: auto;
+		}
 
-        div.c-wrapper {
-            width: 60%;
-            margin: auto;
-        }
+		.text-banner {
+			font-family: Georgia;
+			color: #e47000;
+		}
 
-        .text-banner {
-            font-family: Georgia;
-            color: #e47000;
-        }
+		h1.text-banner {
+			font-family: Georgia;
+			color: #e47000;
+		}
 
-        h1.text-banner {
-            font-family: Georgia;
-            color: #e47000;
-        }
+		.color-orange {
+			color: #e47000;
+			background-color: #e47000;
+			border-color: #e47000;
+		}
 
-        .color-orange {
-            color: #e47000;
-            background-color: #e47000;
-            border-color: #e47000;
-        }
+		body {
+			background: rgb(255, 255, 255);
+		}
 
-        body {
-            background: rgb(255,255,255);
-        }
+		.body-content {
+			min-height: 580px;
+		}
 
-        .body-content {
-            min-height: 580px;
-        }
+		.carousel-caption>p {
+			color: white;
+			font-size: 17px;
+			text-shadow: 1px 1px 2px black;
+		}
 
-        .carousel-caption > p {
-            color: white;
-            font-size: 17px;
-            text-shadow: 1px 1px 2px black;
-        }
+		div.carousel-caption {
+			text-shadow: 2px 2px 4px #333;
+		}
 
-        div.carousel-caption {
-            text-shadow: 2px 2px 4px #333;
-        }
+		.v-center div[class*='col-'] {
+			display: table-cell !important;
+			vertical-align: middle;
+			float: none;
+		}
 
-        .v-center div[class*='col-'] {
-            display: table-cell !important;
-            vertical-align: middle;
-            float: none;
-        }
+		ul.nav li a,
+		ul.nav li a:visited,
+		ul.nav form li a,
+		li a:visited,
+		li a {
+			color: #1c5a8f;
+		}
 
-        ul.nav li a, ul.nav li a:visited, ul.nav form li a, li a:visited, li a {
-            color: #1c5a8f;
-        }
+		ul.nav li a {
+			background-color: none;
+			border-top: solid;
+			border-top-color: transparent;
+			border-top-width: medium;
+			border-radius: 0px;
+			font-size: large;
+			font-weight: normal;
+		}
 
-        ul.nav li a {
-            background-color: none;
-            border-top: solid;
-            border-top-color: transparent;
-            border-top-width: medium;
-            border-radius: 0px;
-            font-size: large;
-            font-weight: normal;
-        }
+		ul.nav li a:hover {
+			background-color: transparent;
+			border-top: solid;
+			border-top-color: #db5114;
+			border-top-width: medium;
+		}
 
-            ul.nav li a:hover {
-                background-color: transparent;
-                border-top: solid;
-                border-top-color: #db5114;
-                border-top-width: medium;
-            }
+		ul.dropdown-menu li a {
+			font-weight: normal;
+			font-size: 14px;
+		}
 
-        ul.dropdown-menu li a {
-            font-weight: normal;
-            font-size: 14px;
-        }
+		.nav .open>a,
+		nav .open>a:focus {
+			border-top-color: #db5114;
+		}
 
-        .nav .open > a, nav .open > a:focus {
-            border-top-color: #db5114;
-        }
+		.pad-left-0 {
+			padding-left: 0px;
+		}
 
-        .pad-left-0 {
-            padding-left: 0px;
-        }
+		.pad-right-zero {
+			padding-right: 0px;
+		}
 
-        .pad-right-zero {
-            padding-right: 0px;
-        }
+		.carouselimage {
+			max-height: 800px;
+		}
 
-        .carouselimage {
-            max-height: 800px;
-        }
+		.carousel.fade {
+			opacity: 1;
+		}
 
-        .carousel.fade {
-            opacity: 1;
-        }
+		.carousel.fade .item {
+			-moz-transition: opacity ease-in-out .7s;
+			-o-transition: opacity ease-in-out .7s;
+			-webkit-transition: opacity ease-in-out .7s;
+			transition: opacity ease-in-out .7s;
+			left: 0 !important;
+			opacity: 0;
+			top: 0;
+			position: absolute;
+			width: 100%;
+			display: block !important;
+			z-index: 1;
+		}
 
-            .carousel.fade .item {
-                -moz-transition: opacity ease-in-out .7s;
-                -o-transition: opacity ease-in-out .7s;
-                -webkit-transition: opacity ease-in-out .7s;
-                transition: opacity ease-in-out .7s;
-                left: 0 !important;
-                opacity: 0;
-                top: 0;
-                position: absolute;
-                width: 100%;
-                display: block !important;
-                z-index: 1;
-            }
+		.carousel.fade .item:first-child {
+			top: auto;
+			position: relative;
+		}
 
-                .carousel.fade .item:first-child {
-                    top: auto;
-                    position: relative;
-                }
+		.carousel.fade .item.active {
+			opacity: 1;
+			-moz-transition: opacity ease-in-out .7s;
+			-o-transition: opacity ease-in-out .7s;
+			-webkit-transition: opacity ease-in-out .7s;
+			transition: opacity ease-in-out .7s;
+			z-index: 2;
+		}
 
-                .carousel.fade .item.active {
-                    opacity: 1;
-                    -moz-transition: opacity ease-in-out .7s;
-                    -o-transition: opacity ease-in-out .7s;
-                    -webkit-transition: opacity ease-in-out .7s;
-                    transition: opacity ease-in-out .7s;
-                    z-index: 2;
-                }
+		.img-carousel {
+			width: auto;
+			display: block;
+			margin-right: auto;
+			margin-left: auto;
+		}
 
-        .img-carousel {
-            width: auto;
-            display: block;
-            margin-right: auto;
-            margin-left: auto;
-        }
+		.page-header {
+			background-color: white;
+			margin-bottom: 0px;
+			border-bottom: none;
+		}
 
-        .page-header {
-            background-color: white;
-            margin-bottom: 0px;
-            border-bottom: none;
-        }
+		.carousel-text {
+			color: black;
+			text-shadow: none;
+			font-size: 18px;
+		}
 
-        .carousel-text {
-            color: black;
-            text-shadow: none;
-            font-size: 18px;
-        }
-
-        .trans-back {
-            background-image: url(../../Images/pillBr_02.png);
-            border-radius: 20px;
-        }
-    </style>
+		.trans-back {
+			background-image: url(../../Images/pillBr_02.png);
+			border-radius: 20px;
+		}
+	</style>
 
 </head>
 
 <body>
-    <div class="container " id="header">
-        <div class="page-header row ">
-            <div class="col-md-5 v-center pad-right-zero ">
-                <div class="no-padding">
-                    <a href="https://myorangeclerk.com">  <img class="img-responsive noprint" src="/Images/BannerLogo.png" alt="Tiffany Moore Russel Orange County Clerk Records Search - Logo" /> </a>
-                </div>
-            </div>
+	<div class="container " id="header">
+		<div class="page-header row ">
+			<div class="col-md-5 v-center pad-right-zero ">
+				<div class="no-padding">
+					<a href="https://myorangeclerk.com">
+						<img class="img-responsive noprint" src="/Images/BannerLogo.png" alt="Tiffany Moore Russel Orange County Clerk Records Search - Logo" /> </a>
+				</div>
+			</div>
 
-            <div class="col-md-7 pad-left-zero bottom-aligned-text nav-background">
-                <div class="hidden-sm hidden-xs">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="skipLink" tabindex="1">
-                                <a href="#main">Skip to content...</a>
-                            </div>
-                        </div>
+			<div class="col-md-7 pad-left-zero bottom-aligned-text nav-background">
+				<div class="hidden-sm hidden-xs">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="skipLink" tabindex="1">
+								<a href="#main">Skip to content...</a>
+							</div>
+						</div>
 
-                        <div class="col-md-7 text-right">
-                            <a href="/Home/Index"> <img class="logo-box" src="/Images/MyEclerkLogo2.jpg" alt="my eclerk logo" /></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="navbar hidden-xs ">
-                    <div class="collapse navbar-collapse text-center">
-                        <ul class="nav nav-pills" id="navbar">
-                            <li><a href="/home/index">Home</a></li>
-                            <li role="presentation"><a href="/Cases/Search">Records Search</a></li>
-                            <li><a href="https://myorangeclerk.com/Misc-Pages/ADA">Accessibility</a></li>
-                            <li><a href="/ECertify/VerifyDocument">Agency Only Verification</a></li>
+						<div class="col-md-7 text-right">
+							<a href="/Home/Index">
+								<img class="logo-box" src="/Images/MyEclerkLogo2.jpg" alt="my eclerk logo" /></a>
+						</div>
+					</div>
+				</div>
+				<div class="navbar hidden-xs ">
+					<div class="collapse navbar-collapse text-center">
+						<ul class="nav nav-pills" id="navbar">
+							<li><a href="/home/index">Home</a></li>
+							<li role="presentation"><a href="/Cases/Search">Records Search</a></li>
+							<li><a href="https://myorangeclerk.com/Misc-Pages/ADA">Accessibility</a></li>
+							<li><a href="/ECertify/VerifyDocument">Agency Only Verification</a></li>
 
-                                <li><a href="/account/Register">Register </a></li>
-                                <li><a href="/Account/Login">Log in</a></li>
+							<li><a href="/account/Register">Register </a></li>
+							<li><a href="/Account/Login">Log in</a></li>
 
-                        </ul>
-                    </div>
-                </div>
+						</ul>
+					</div>
+				</div>
 
-                <div class="navbar navbar-default hidden-lg hidden-md hidden-sm navbar-static-top" role="navigation">
-                    <div class="">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<div class="navbar navbar-default hidden-lg hidden-md hidden-sm navbar-static-top" role="navigation">
+					<div class="">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                    </div>
-                    <div class="collapse navbar-collapse text-center">
-                        <ul class="nav nav-pills nav-stacked">
-                            <li><a href="/home/index">Home</a></li>
-                            <li><a href="https://myorangeclerk.com/Misc-Pages/ADA">Accessibility</a></li>
+					</div>
+					<div class="collapse navbar-collapse text-center">
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="/home/index">Home</a></li>
+							<li><a href="https://myorangeclerk.com/Misc-Pages/ADA">Accessibility</a></li>
 
-                            <li><a href="/Cases/Search">Records Search</a></li>
-                            <li><a href="/ECertify/VerifyDocument">Agency Only Verification</a></li>
-                                <li><a href="/account/Register">Register </a></li>
-                                <li><a href="/Account/Login">Log in</a></li>
+							<li><a href="/Cases/Search">Records Search</a></li>
+							<li><a href="/ECertify/VerifyDocument">Agency Only Verification</a></li>
+							<li><a href="/account/Register">Register </a></li>
+							<li><a href="/Account/Login">Log in</a></li>
 
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="container body-content ">
-        <section>
-            <main id="main">
-                
+	<div class="container body-content ">
+		<section>
+			<main id="main">
 
 
-    
-    <link href="/Content/jquery.dataTables.min.css" rel="stylesheet" />
-    <script src="/Scripts/jquery.dataTables.min.js"></script>
-    
-<link href="/Content/print.css" rel="stylesheet" media="print" />
-    <script>
-        $(document).ready(function () {
-            $('#caseList').DataTable( {
-                "lengthMenu": [[15, 25, 50, 75, -1], [15, 25, 50, 75, "All"]]
-                });
-        });
+				<div class="col-md-12">
+					<div class="panel panel-info">
 
-        function printDoc() {
-            var prtContent = document.getElementById("printCaseList");
-            var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
-            WinPrint.document.write(prtContent.innerHTML);
-            WinPrint.document.close();
-            WinPrint.focus();
-            WinPrint.print();
-            WinPrint.close();
-        }
-    </script>
+						<div class="panel-body">
+							<h2 class="text-info"></h2>
+							<h3 class="text-primary">Something unexpected happened and has been recorded in our system.
+								If this problem persists, please contact the system administrator. The error number
+								provided below can be used to help us fix the issue.</h3>
+							<div>
+								Error Code: 34711316
+							</div>
+						</div>
+					</div>
+				</div>
 
-<link href="/Content/Gridmvc.css" rel="stylesheet" />
-<script src="/Scripts/gridmvc.js"></script>
-<style>
-     #printCaseList{
-     display:none;
- } 
-    .dataTables-filter{
-       max-width:none !important;
-        width:600px !important;
-    }
-    .caseList_filter label input, .caseList_filter label {
-        max-width:none !important;
-        width:600px !important;
-        
-        
-    }
-    .body {
-        font-size: 8px;
-    }
+			</main>
+		</section>
+	</div>
+	<footer>
+		<div class="footer">
+			<div class="container">
+				<div class="col-md-3 col-md-offset-1">
+					<div class="panel-title">
+						Help & Support
+					</div>
+					<a href="/Home/FAQ">FAQ</a><br />
+					<a href="/Home/GlossaryOfTerms">Glossary of Terms</a><br />
+					<a href="https://www.myorangeclerk.com/Misc-Pages/Contact-Us">Contact Support<br /></a>
+						<a href="https://myorangeclerk.com/Misc-Pages/Privacy-Statement?pagesection=Privacy Statement">View
+							Our Privacy Statement<br /></a>
 
-    .panel-body {
-        font-size: 12px;
-    }
+				</div>
+				<div class="col-md-4 text-center" style="margin-top:-20px;">
 
-    .pull-right {
-        margin-right: 6px;
-    }
-
-    .pagination {
-        margin-top: 0px;
-    }
-    .hideColumn{
-    visibility:hidden;
-}
-    .hRed{
-        color:red;
-    }
-
-    .caseList{
-        min-height:400px;
-    }
-
-    .caseList table tbody tr td{
-        padding: 5px 5px;
-    }
-    .colCaseNumber{
-        min-width:150px;
-    }
- th:nth-child(2) > .grid-filter:first-child > .dropdown-menu{
-     position:absolute;
-        margin-left:52px;
-        z-index:2000;
-    }
-
- .table th{
-     width:auto !important;
- }
-
- .well{
-     margin-bottom:20px;
- }
-</style>
-
-<div class="">
-    <div class="panel panel-primary">
-        <div class="panel-heading"><a class="pull-left print-icon" style="color:white" href="javascript:printDoc()">&nbsp;<span class="glyphicon glyphicon-print"></span>&nbsp; Print</a><h4 class="text-center">
-   
-    Search Result: 34 cases
-</h4>
-        </div>
-        <div class="panel-body">
-            <div class="well">
-                <p>
-                      Record searches are limited to the first 500 results. For better search results, please refine your search criteria. Please note, if you have recently filed a Notice of Appearance, it may take up to 48 hours for the case to be reflected on this list. Search results can be sorted by clicking on column headings and can also be filtered by adding text to the search field.
-                </p>
-                <p>
-                    Review your results carefully!  Name searches on my eClerk return exact matches and some variations of that name.  It is your responsibility to verify that the case party
-                    information returned matches your intended search criteria.
-                </p>
-            </div>
-
-                <div class="table-responsive">
-                    <div id="grid" class="caseList">
-
-                       <table id="caseList" class="table grid-table table-striped table-condensed table-fixed">
-                            <thead>
-                                <tr>
-                                    <th >#</th>
-                                    <th class="col-casenumber grid-header">Case Number</th>
-                                    <th >Description</th>
-                                    <th >Type</th>
-                                    <th> Status</th>
-                                    <th >DOB</th>
-                                    <th >Judge Name</th>
-                                    <th>Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=12320263&amp;caseIdEnc=tqg9pqfl2LRqUVO9yp4Ha5%2F%2BM%2BwMDS6hZptCpisP4FDEXiWzgOQUjmSbm7LAZLF%2B%2BG5pGGR9bBhjsvhxtzQ%2B1q0LqeypnWbHBfAh59mf4kg%3D">2022-CP-002404-O</a>                                        </td>
-                                        <td>RE: Estate of
-CARTHELIA ANN WATSON
-Deceased</td>
-                                        <td>Summary Administration Over $1000</td>
-                                        <td>Pending</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-07/14/2022                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=12280883&amp;caseIdEnc=urfKZZqtXni03orCK7lgccHeGINXlSsg3oNcNJ%2Fw%2BwstSMbwMzFOi7H%2FBpiS7yWurhdKE8%2FOvHpFTfQhFv9VfNhkkDbALFo4Bv33Ak9Qz50%3D">2022-CP-002081-O</a>                                        </td>
-                                        <td>Re: Estate of
-ROBERT LOUIS SMITH
-Deceased</td>
-                                        <td>Summary Administration Under $1000</td>
-                                        <td>Pending</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-06/14/2022                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=12129360&amp;caseIdEnc=9MUtKNzozzyvz1O61PgPi1qW27%2FFKzVm5cBG9QIlX3usI0t%2F0umrpndC79HqXnXbwNZR6rsRwLSNm4go7kTYtyz8xnHFCKXDE8pHbTQTaAA%3D">2022-CP-000614-O</a>                                        </td>
-                                        <td>RE: Estate of 
-CAROLYN PATRICIA SMITH
-Deceased</td>
-                                        <td>Formal Administration</td>
-                                        <td>Pending</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-02/21/2022                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=11999391&amp;caseIdEnc=JXQgLSFVk%2FcoQr1HI3W9KASBIQvM3zRBUvsoEjRa0JtGZuJ4eqY229OsuVzGute9NVCTa72CXLuaqX86320Je66LegJAL7aTxdoDHJFj04U%3D">2021-CP-003633-O</a>                                        </td>
-                                        <td>RE: Estate of 
-ROBERT L SMITH
-Deceased</td>
-                                        <td>Formal Administration</td>
-                                        <td>Pending</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-11/02/2021                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=11643042&amp;caseIdEnc=ubQWpN%2FkRq60WpSqdbx2keDnS54j00BMMd6qj6DzexPw8TrUcq9ALmtFkf0O158UGfFqN8PGXjYNoAUlr%2BGpW0wG%2Fop8HbVzZfy1qGUs9e0%3D">2021-CP-000275-O</a>                                        </td>
-                                        <td>RE: Estate of
-ROBERT LESLIE SMITH, SR
-Deceased</td>
-                                        <td>Summary Administration Over $1000</td>
-                                        <td>Closed</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-01/26/2021                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=11399852&amp;caseIdEnc=LAqwjRNnahm88IyKaj2cT4sFR0HhcM1lZdFvqDlmlS6GXrahMUVf%2FXvjigGGs7qyinn8%2FICWhyAGlH%2BbDdYsNRBGSSYEL3j9badE0BW8vy8%3D">2020-GA-000252-O</a>                                        </td>
-                                        <td>RE: Guardianship of 
-ROBERT LEE SMITH
-Ward</td>
-                                        <td>Guardianship of the Person &amp; Property</td>
-                                        <td>Closed</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Leticia Marques</td>
-                                        <td>
-06/16/2020                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=11040547&amp;caseIdEnc=nFjmxja71Y3UJsdxxkY%2FP0NcdJXFxKRUqDqbAHrAwSqeNT5qBg1bUZiqCTNoYz2NDowhxETKtecCewsyLqAJmfCI065wjfPVTVDNWu9mBFc%3D">2019-CP-001868-O</a>                                        </td>
-                                        <td>RE: Estate of 
-MARCELLA E SMITH
-Deceased</td>
-                                        <td>Disposition of Personal Property without Administration</td>
-                                        <td>Closed</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-07/01/2019                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>8</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=10912756&amp;caseIdEnc=NoCt1rRXml%2Bybdt0kj4xlRNUwjLLOvBH81pbwdJkfRgqrTZtZ1uJi%2F%2FUOfEnVCxfMsYLJcsdKCtCYC%2FD%2BNccd0RsViltXTkUtfCIzcScUOE%3D">2019-CP-000731-O</a>                                        </td>
-                                        <td>RE: Estate of
-ROBERT E SMITH
-Deceased</td>
-                                        <td>Summary Administration Over $1000</td>
-                                        <td>Closed</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-03/12/2019                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>9</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=10270394&amp;caseIdEnc=u3UOqpwYCQI72ebW%2F0kMvh4oYvYuEkrLu5rWpd%2Fmb7hsd6OaxnsS2iftDBqSnNliBhSrUTfAiOATGRp0aVxSqBWDGPtJifu0vZ6z1yGGRPE%3D">2017-CP-002489-O</a>                                        </td>
-                                        <td>RE: Estate of
-MARCELLA E SMITH
-Deceased</td>
-                                        <td>Notice of Trust</td>
-                                        <td>Closed - Non SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td > </td>
-                                        <td>
-08/17/2017                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>10</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=9878698&amp;caseIdEnc=SlK%2B0idRguSzaXLAEvANcQLtTwJ5Aofth%2FNVoILLv4deerBHVvrLLvZi7QaJO20kRQlqgqPfmRxFHRH%2BN9OvQqLJVHn4gmeFgFVmXjfJvvU%3D">2016-CP-002653-O</a>                                        </td>
-                                        <td>RE: Estate of 
-ROBERT LEONARD SMITH, SR
-Deceased</td>
-                                        <td>Disposition of Personal Property without Administration</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-09/14/2016                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>11</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=9131759&amp;caseIdEnc=8i9TS%2Fkxs0SFiLD4i%2BpRTZcIkBspKtg%2BCjwcMG8hFKpxPX9qM%2BCwD3w9Rz4nTiO4EqlZujtKs1FECEvdKBwK2ldfx3tX23nTQti24r3Sm3w%3D">2014-CP-003284-O</a>                                        </td>
-                                        <td>RE: Estate of
-ROBERT L SMITH
-Deceased</td>
-                                        <td>Will for Safekeeping</td>
-                                        <td>Closed - Non SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td > </td>
-                                        <td>
-12/31/2014                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>12</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=8603434&amp;caseIdEnc=n1kqRLZhIK54jxJ6FY2BEfcZmH3vqv%2Bsx2z0HYE4decUp0%2Fa3Fu2cdJ%2Fmn6c6UjGyWeVLqMR5%2BXMe%2B9MGJjDgwb5ZwoRv2Jv9nrZm4BXMLA%3D">2013-CP-001863-O</a>                                        </td>
-                                        <td>RE: Estate of 
-ZOLA LEE JOHNSON
-Deceased</td>
-                                        <td>Formal Administration</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-08/27/2013                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>13</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=8391399&amp;caseIdEnc=eQj6%2BO7ZhUNxD2ecoGIGcAcp9cUuSpAjZRRMOa3o1mqOzi9QF0zi95Hoatyr0XkoS%2FNQ9J9mVWHb7s61VfPzgsMNrRsr9M1QDocif5NQ7HA%3D">2013-CP-000330-O</a>                                        </td>
-                                        <td>RE: Estate of 
-WILLIAM S SMITH, JR
-Deceased</td>
-                                        <td>Formal Administration</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-02/11/2013                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>14</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=7590714&amp;caseIdEnc=momTZ7sramEfpPPbfT0rvz2wgkIO5KkB59ir2ySw88mTSUYUEe8YLsdIys1G1%2FDpDHZUvCMh7JAiAGKTsHswUO%2FySXBpk7p5WvSxuKdfnbs%3D">2011-CP-000508-O</a>                                        </td>
-                                        <td>RE: Estate of 
-ROBERT L SMITH, SR
-Deceased</td>
-                                        <td>Caveat by Creditor</td>
-                                        <td>Closed - Non SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td > </td>
-                                        <td>
-03/04/2011                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>15</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=148533&amp;caseIdEnc=CdXr351JuyFh69x3Sz4kQXTpqtPaXmn7KRQ%2Bjf5AHEHgmn8P845eMcwKgTzitI8P8dTAuLjIzMOYr%2Bayww0hgGpfjohPK8Z4%2B%2FHvYosMnx4%3D">2004-CP-002742-O</a>                                        </td>
-                                        <td>IN RE: Estate of JOYCE HELEN SMITH, Decedent</td>
-                                        <td>Formal Administration</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-10/18/2004                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>16</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=140187&amp;caseIdEnc=2b1bY4Tv9cCqekOUfBWSJjWxdYQ6OyZk8fSlMzN%2BD%2BQ%2Bd6brRlajIzdy7J3m6N49VzOvNNU6h95wm97XLk0gKoR1HsgHwZN934YnkaQtExo%3D">2003-CP-000509-O</a>                                        </td>
-                                        <td>IN RE: Estate of ROBERT WILLIAM SMITH, Decedent</td>
-                                        <td>Summary Administration Over $1000</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-02/26/2003                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>17</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=137640&amp;caseIdEnc=RB76K5uEm0jLl%2B9AX5PUT%2FqVo9hGt2l7l6jb9emtipsxfToQBRsixpqSDlzE7wcaNVG4A7c5QkNDl%2FuNXQPRiBj9NQWn3q%2FxI8%2F%2By4EZXPM%3D">2002-CP-001956-O</a>                                        </td>
-                                        <td>IN RE: Estate of ROBERT E SMITH, Decedent</td>
-                                        <td>Formal Administration</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-07/31/2002                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>18</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=136630&amp;caseIdEnc=D7BFEqL5jgJN5Tlr6KtSleo8bekO9bN9MU7V84U1I8DvevwczW3uzLmZ%2BD9ILJcnfq0k%2BkLnL8EPLVnWCXmFAatXAharW6NqqDQXs88LFWY%3D">2002-CP-001219-O</a>                                        </td>
-                                        <td>IN RE: Estate of ROBERT DRUMMOND SMITH, Decedent</td>
-                                        <td>Formal Administration</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-05/08/2002                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>19</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=131871&amp;caseIdEnc=wcbEaA0RCD91AFvsjL11w9rZylnyCm57IUMUlGJ7j9%2BUWh47mL2RWzb71yIxx69N8oaCSHFELTMOBMWnZcPATJsmNXif%2FxESXxVqi2f1Tuw%3D">2001-CP-000527-O</a>                                        </td>
-                                        <td>IN RE: Guardianship of ECKHARDT H CALDER, Ward</td>
-                                        <td>Guardianship of the Property</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Leticia Marques</td>
-                                        <td>
-03/14/2001                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>20</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=133466&amp;caseIdEnc=P8qA4Az%2BrchI3aO8hrdWUP0m0b3F0sQd5%2BAWzRPRg1k0kul1HQs0JnXsgADMxBC75jZpnMlhIT6IeuP55oxiiR4D9F%2BrupQLGzsBMbBzp5Q%3D">2001-CP-000500-S</a>                                        </td>
-                                        <td>IN RE: Estate of ROBERT D SMITH, Decedent</td>
-                                        <td>Will for Safekeeping</td>
-                                        <td>Closed - Non SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td > </td>
-                                        <td>
-08/10/2001                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>21</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=129320&amp;caseIdEnc=FA6Zo8X22bNpRtiJ3QEnjOJHlXT%2FMPCKiHiHrJpvUk9jc3mdHW19BYA7aOY94pvZsHbiqUfEBEb1L04V%2BvAfd9v3If7O8KNk3H1rhtIrNso%3D">2000-CP-000467-S</a>                                        </td>
-                                        <td>IN RE: Estate of ROBERT DRUMMOND SMITH, Decedent</td>
-                                        <td>Will for Safekeeping</td>
-                                        <td>Closed - Non SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td > </td>
-                                        <td>
-07/19/2000                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>22</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=127036&amp;caseIdEnc=jIZ8PRfDQGLLE5IowkzaZFkQseYl19VOqNR0tw79n0h0BzUGWc1Xu%2F0tPGXrvE%2FgrmcsnKlq3Teistj0%2FGvYMLjGDLEVRCPi6CbVem%2Fj9qo%3D">1999-CP-002028-O</a>                                        </td>
-                                        <td>IN RE: Estate of ROBERT M SMITH, Decedent</td>
-                                        <td>Notice of Trust</td>
-                                        <td>Closed - Non SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td > </td>
-                                        <td>
-12/14/1999                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>23</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=228827&amp;caseIdEnc=z1OV%2FASVpd2fqGkURyn4RapqWGOsltRJe%2FT9s9A4VdE%2BV9HotAGUI3fd8UDZUeXFQ7VCZ2tvon6oJNh5NtkeRS5IbnAdLEFtz1jo6QFw5Po%3D">1997-CP-001858-O</a>                                        </td>
-                                        <td>IN RE: Estate of DAVID S SMITH, Decedent</td>
-                                        <td>Disposition of Personal Property without Administration</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-10/15/1997                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>24</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=218552&amp;caseIdEnc=WypbQ59X%2BSAcNwANPeCzOctYLEd7YWkjIbjuLl1ufeeqn%2F4FL9OOd%2BDs0K49CNZW9pq99BFiPjDHRy3zhbS3qUlPNy8SaFi9nU3HMXJlRes%3D">1993-CP-001176-O</a>                                        </td>
-                                        <td>IN RE: Guardianship of ROBERT ALLEN SMITH, Ward</td>
-                                        <td>Guardianship of the Property</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Leticia Marques</td>
-                                        <td>
-06/15/1993                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>25</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=203856&amp;caseIdEnc=T9RWxt1UBKIwfVII3zFOYsKJN4%2BJwFt0%2Fc6Iz4%2BhvvPMl7ku1VevizGlOoWdBFX92Fa9eB%2BudusnkW8O%2F%2F3xTG4hDMDPIVn9IGlTn51vfbI%3D">1986-CP-001606-O</a>                                        </td>
-                                        <td>IN RE: Estate of ROBERT LEE SMITH, Decedent</td>
-                                        <td>Formal Administration</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-10/16/1986                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>26</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=239527&amp;caseIdEnc=z66b7Qkrbmwuxa9mxV%2BWJ20qyKBdEKKy8LJatbMAvMY4%2F4w4vwqpSZkP%2BGUp1Rsgzcfgs5h%2B6ncYgzaqCLbSvspeOhSFNkpQMnvyQSmVVjk%3D">1986-CP-000114-S</a>                                        </td>
-                                        <td>IN RE: Estate of ROBERT JACKSON SMITH, Decedent</td>
-                                        <td>Will for Safekeeping</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td > </td>
-                                        <td>
-02/12/1986                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>27</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=201464&amp;caseIdEnc=U8GT6r9jQKOfSiNAfg6sy8J2zseGmO4KWSL4hxTUMqgz8F%2BgzBSHDSfAzxr%2BwohXtIsWMHCycIchkPguJD%2BDiLmzDJJc2zXCtCfYFHlvjEU%3D">1985-CP-001056-O</a>                                        </td>
-                                        <td>IN RE: Estate of ROBERT TAYLOR SMITH, Decedent</td>
-                                        <td>Formal Administration</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-07/26/1985                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>28</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=201452&amp;caseIdEnc=5URgsxbJa9lTrMZ7n0LmblgN2CgNq2i8G7P7VsGk5DsW%2FjY77gdFxYOMHeWpcvLVknmwfFUSs2O7sgSo179p6kYuu9rqCFRi8JbnYAyCoOo%3D">1985-CP-001044-O</a>                                        </td>
-                                        <td>IN RE: Estate of ROBERT T SMITH, Decedent</td>
-                                        <td>Safe Deposit Box</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-07/25/1985                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>29</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=239114&amp;caseIdEnc=30PnP1LG7s42Bml6hapqaJHbbgqaQfY7Ofx4MjersE93rDWSd%2FwdERirkuREHT9%2Fdo9GmHT2Y5CaK1ROVnDmfWqFas2SDcMyuJx8dVc1MqU%3D">1985-CP-000398-S</a>                                        </td>
-                                        <td>IN RE: Estate of ROBERT T SMITH, Decedent</td>
-                                        <td>Will for Safekeeping</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td > </td>
-                                        <td>
-07/25/1985                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>30</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=237873&amp;caseIdEnc=cwvYFtEI735F5iBhN21F2uNaAjIllSnW5rajzoPi3ziueE8KOtmeGVLSK%2BYwO3XOWVF9GACThLJPwDWfwHl74q4cL77RLrYAESK4aoF048E%3D">1983-CP-000467-S</a>                                        </td>
-                                        <td>IN RE: Estate of ROBERT LAWRENCE SMITH, Decedent</td>
-                                        <td>Will for Safekeeping</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td > </td>
-                                        <td>
-09/02/1983                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>31</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=194249&amp;caseIdEnc=5xeOqg1DOBBIMnghEHeHavZZVwAkyGoTd8mSgai6hm7rZfLwc2dISoo0dTv6%2BuLbQP6mlGMmM0ahxkdolaJA61yG3uJ7GbIkC6sPV8S1RQM%3D">1981-CP-000656-O</a>                                        </td>
-                                        <td>IN RE: Estate of ROBERT W SMITH, Decedent</td>
-                                        <td>Formal Administration</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-05/19/1981                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>32</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=189736&amp;caseIdEnc=qfWYGB5IPcun88P9qgjX5vgKgB%2BfSW83ns1yeRc4a84FOKLoMDCh7hzrHZk9OFCfuXywmOMB8MhxUD8SMIePsrJwjuJKT0aZT5Kk0Dpwmv4%3D">1978-CP-001283-O</a>                                        </td>
-                                        <td>IN RE: Estate of ROBERT N SMITH, Decedent</td>
-                                        <td>Formal Administration</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-07/27/1978                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>33</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=188813&amp;caseIdEnc=JOhnnHR8DkGvObaC%2F%2BxKcq8jGheeeOybjAydY12ttQ%2BnDgKFfWniGwiPHv282%2Fej6mU07L92Lf0cF4MET6N7Xb1XPQ4J%2BKumxSL4qCy8h0s%3D">1977-CP-001802-O</a>                                        </td>
-                                        <td>IN RE: Estate of ROBERT JOHNSON SMITH, Decedent</td>
-                                        <td>Formal Administration</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td >Alice L Blackwell</td>
-                                        <td>
-11/03/1977                                        </td>
-                                </tr>
-                                    <tr>
-                                        <td>34</td>
-                                        <td class="colCaseNumber">
-<a class="caseLink" href="/CaseDetails?caseId=233391&amp;caseIdEnc=Msm5z7Z0V1wdF629I24%2Fjf%2BLm569FoJ%2Fd3PwtlARKxhVaGC%2B4S3RttBoDkKwyQkNvngCUy9l1NHbNByxVipiKuVGrABEHe4Xm0%2Byw8flGx4%3D">1975-CP-000410-S</a>                                        </td>
-                                        <td>IN RE: Estate of ROBERT M SMITH, Decedent</td>
-                                        <td>Will for Safekeeping</td>
-                                        <td>Closed - SRS</td>
- 
-                                        <td >
-                                                <span hidden="hidden"> 01/01/1900</span>
-                                        </td>
-                                        <td > </td>
-                                        <td>
-10/08/1975                                        </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                      
-                     
-                    </div>
-                </div>
-               
-            <div>
-
-            </div>
-         
-          
-        </div>
-      
-    </div>
-</div>
-
-<!-- ********************************************    PRINT FORM ****************************************************-->
-<div class="panel panel-primary print" id="printCaseList">
-
-    <style>
-        table.pt {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            font-size: 8pt;
-            width: 100%;
-            border-style: solid;
-            border-width: thin;
-            border-color: black;
-        }
-
-        th {
-            text-align: left;
-        }
-
-        .pt caption {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            font-size: 12pt;
-            text-align: center;
-            border-style: solid;
-            border-width: thin;
-            border-color: black;
-            border-bottom-style: none;
-            background-color: lightgray;
-        }
-
-        .pt tr td {
-            border-bottom-style: dotted;
-            border-bottom-color: gray;
-            border-bottom-width: thin;
-            vertical-align: top;
-        }
-
-        a[href]:after {
-            content: none;
-        }
-
-        text {
-            /*margin-left:150px;*/
-        }
-    </style>
-
-    <div style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12pt;">
-        <span>
-            <img src="/Images/OCCCLogoSmaller.jpg" alt="Records Search logo" style="float:left;" />
-            
-        </span>
-        <br />
-        <br />
-        <text style="font-size:12pt; margin-left:33px;">Orange County Clerk - Court Records Search</text>
-        <br />
-    </div>
-    <br />
-    <br />
-    <table class="pt" style="margin-top:6px;">
-        <caption>Case Search Results</caption>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th class="col-casenumber grid-header" style="width:135px; margin-left:10px;">Case Number</th>
-                <th>Description</th>
-                <th>Type</th>
-                <th>DOB</th>
-                <th>Judge Name</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-                <tr>
-                    <td>1.</td>
-                    <td class="colCaseNumber">
-                        2022-CP-002404-O
-                    </td>
-                    <td>RE: Estate of
-CARTHELIA ANN WATSON
-Deceased</td>
-                    <td>Summary Administration Over $1000</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-07/14/2022                    </td>
-                </tr>
-                <tr>
-                    <td>2.</td>
-                    <td class="colCaseNumber">
-                        2022-CP-002081-O
-                    </td>
-                    <td>Re: Estate of
-ROBERT LOUIS SMITH
-Deceased</td>
-                    <td>Summary Administration Under $1000</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-06/14/2022                    </td>
-                </tr>
-                <tr>
-                    <td>3.</td>
-                    <td class="colCaseNumber">
-                        2022-CP-000614-O
-                    </td>
-                    <td>RE: Estate of 
-CAROLYN PATRICIA SMITH
-Deceased</td>
-                    <td>Formal Administration</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-02/21/2022                    </td>
-                </tr>
-                <tr>
-                    <td>4.</td>
-                    <td class="colCaseNumber">
-                        2021-CP-003633-O
-                    </td>
-                    <td>RE: Estate of 
-ROBERT L SMITH
-Deceased</td>
-                    <td>Formal Administration</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-11/02/2021                    </td>
-                </tr>
-                <tr>
-                    <td>5.</td>
-                    <td class="colCaseNumber">
-                        2021-CP-000275-O
-                    </td>
-                    <td>RE: Estate of
-ROBERT LESLIE SMITH, SR
-Deceased</td>
-                    <td>Summary Administration Over $1000</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-01/26/2021                    </td>
-                </tr>
-                <tr>
-                    <td>6.</td>
-                    <td class="colCaseNumber">
-                        2020-GA-000252-O
-                    </td>
-                    <td>RE: Guardianship of 
-ROBERT LEE SMITH
-Ward</td>
-                    <td>Guardianship of the Person &amp; Property</td>
-                    <td>
-                    </td>
-                    <td>Leticia Marques</td>
-                    <td>
-06/16/2020                    </td>
-                </tr>
-                <tr>
-                    <td>7.</td>
-                    <td class="colCaseNumber">
-                        2019-CP-001868-O
-                    </td>
-                    <td>RE: Estate of 
-MARCELLA E SMITH
-Deceased</td>
-                    <td>Disposition of Personal Property without Administration</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-07/01/2019                    </td>
-                </tr>
-                <tr>
-                    <td>8.</td>
-                    <td class="colCaseNumber">
-                        2019-CP-000731-O
-                    </td>
-                    <td>RE: Estate of
-ROBERT E SMITH
-Deceased</td>
-                    <td>Summary Administration Over $1000</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-03/12/2019                    </td>
-                </tr>
-                <tr>
-                    <td>9.</td>
-                    <td class="colCaseNumber">
-                        2017-CP-002489-O
-                    </td>
-                    <td>RE: Estate of
-MARCELLA E SMITH
-Deceased</td>
-                    <td>Notice of Trust</td>
-                    <td>
-                    </td>
-                    <td> </td>
-                    <td>
-08/17/2017                    </td>
-                </tr>
-                <tr>
-                    <td>10.</td>
-                    <td class="colCaseNumber">
-                        2016-CP-002653-O
-                    </td>
-                    <td>RE: Estate of 
-ROBERT LEONARD SMITH, SR
-Deceased</td>
-                    <td>Disposition of Personal Property without Administration</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-09/14/2016                    </td>
-                </tr>
-                <tr>
-                    <td>11.</td>
-                    <td class="colCaseNumber">
-                        2014-CP-003284-O
-                    </td>
-                    <td>RE: Estate of
-ROBERT L SMITH
-Deceased</td>
-                    <td>Will for Safekeeping</td>
-                    <td>
-                    </td>
-                    <td> </td>
-                    <td>
-12/31/2014                    </td>
-                </tr>
-                <tr>
-                    <td>12.</td>
-                    <td class="colCaseNumber">
-                        2013-CP-001863-O
-                    </td>
-                    <td>RE: Estate of 
-ZOLA LEE JOHNSON
-Deceased</td>
-                    <td>Formal Administration</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-08/27/2013                    </td>
-                </tr>
-                <tr>
-                    <td>13.</td>
-                    <td class="colCaseNumber">
-                        2013-CP-000330-O
-                    </td>
-                    <td>RE: Estate of 
-WILLIAM S SMITH, JR
-Deceased</td>
-                    <td>Formal Administration</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-02/11/2013                    </td>
-                </tr>
-                <tr>
-                    <td>14.</td>
-                    <td class="colCaseNumber">
-                        2011-CP-000508-O
-                    </td>
-                    <td>RE: Estate of 
-ROBERT L SMITH, SR
-Deceased</td>
-                    <td>Caveat by Creditor</td>
-                    <td>
-                    </td>
-                    <td> </td>
-                    <td>
-03/04/2011                    </td>
-                </tr>
-                <tr>
-                    <td>15.</td>
-                    <td class="colCaseNumber">
-                        2004-CP-002742-O
-                    </td>
-                    <td>IN RE: Estate of JOYCE HELEN SMITH, Decedent</td>
-                    <td>Formal Administration</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-10/18/2004                    </td>
-                </tr>
-                <tr>
-                    <td>16.</td>
-                    <td class="colCaseNumber">
-                        2003-CP-000509-O
-                    </td>
-                    <td>IN RE: Estate of ROBERT WILLIAM SMITH, Decedent</td>
-                    <td>Summary Administration Over $1000</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-02/26/2003                    </td>
-                </tr>
-                <tr>
-                    <td>17.</td>
-                    <td class="colCaseNumber">
-                        2002-CP-001956-O
-                    </td>
-                    <td>IN RE: Estate of ROBERT E SMITH, Decedent</td>
-                    <td>Formal Administration</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-07/31/2002                    </td>
-                </tr>
-                <tr>
-                    <td>18.</td>
-                    <td class="colCaseNumber">
-                        2002-CP-001219-O
-                    </td>
-                    <td>IN RE: Estate of ROBERT DRUMMOND SMITH, Decedent</td>
-                    <td>Formal Administration</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-05/08/2002                    </td>
-                </tr>
-                <tr>
-                    <td>19.</td>
-                    <td class="colCaseNumber">
-                        2001-CP-000527-O
-                    </td>
-                    <td>IN RE: Guardianship of ECKHARDT H CALDER, Ward</td>
-                    <td>Guardianship of the Property</td>
-                    <td>
-                    </td>
-                    <td>Leticia Marques</td>
-                    <td>
-03/14/2001                    </td>
-                </tr>
-                <tr>
-                    <td>20.</td>
-                    <td class="colCaseNumber">
-                        2001-CP-000500-S
-                    </td>
-                    <td>IN RE: Estate of ROBERT D SMITH, Decedent</td>
-                    <td>Will for Safekeeping</td>
-                    <td>
-                    </td>
-                    <td> </td>
-                    <td>
-08/10/2001                    </td>
-                </tr>
-                <tr>
-                    <td>21.</td>
-                    <td class="colCaseNumber">
-                        2000-CP-000467-S
-                    </td>
-                    <td>IN RE: Estate of ROBERT DRUMMOND SMITH, Decedent</td>
-                    <td>Will for Safekeeping</td>
-                    <td>
-                    </td>
-                    <td> </td>
-                    <td>
-07/19/2000                    </td>
-                </tr>
-                <tr>
-                    <td>22.</td>
-                    <td class="colCaseNumber">
-                        1999-CP-002028-O
-                    </td>
-                    <td>IN RE: Estate of ROBERT M SMITH, Decedent</td>
-                    <td>Notice of Trust</td>
-                    <td>
-                    </td>
-                    <td> </td>
-                    <td>
-12/14/1999                    </td>
-                </tr>
-                <tr>
-                    <td>23.</td>
-                    <td class="colCaseNumber">
-                        1997-CP-001858-O
-                    </td>
-                    <td>IN RE: Estate of DAVID S SMITH, Decedent</td>
-                    <td>Disposition of Personal Property without Administration</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-10/15/1997                    </td>
-                </tr>
-                <tr>
-                    <td>24.</td>
-                    <td class="colCaseNumber">
-                        1993-CP-001176-O
-                    </td>
-                    <td>IN RE: Guardianship of ROBERT ALLEN SMITH, Ward</td>
-                    <td>Guardianship of the Property</td>
-                    <td>
-                    </td>
-                    <td>Leticia Marques</td>
-                    <td>
-06/15/1993                    </td>
-                </tr>
-                <tr>
-                    <td>25.</td>
-                    <td class="colCaseNumber">
-                        1986-CP-001606-O
-                    </td>
-                    <td>IN RE: Estate of ROBERT LEE SMITH, Decedent</td>
-                    <td>Formal Administration</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-10/16/1986                    </td>
-                </tr>
-                <tr>
-                    <td>26.</td>
-                    <td class="colCaseNumber">
-                        1986-CP-000114-S
-                    </td>
-                    <td>IN RE: Estate of ROBERT JACKSON SMITH, Decedent</td>
-                    <td>Will for Safekeeping</td>
-                    <td>
-                    </td>
-                    <td> </td>
-                    <td>
-02/12/1986                    </td>
-                </tr>
-                <tr>
-                    <td>27.</td>
-                    <td class="colCaseNumber">
-                        1985-CP-001056-O
-                    </td>
-                    <td>IN RE: Estate of ROBERT TAYLOR SMITH, Decedent</td>
-                    <td>Formal Administration</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-07/26/1985                    </td>
-                </tr>
-                <tr>
-                    <td>28.</td>
-                    <td class="colCaseNumber">
-                        1985-CP-001044-O
-                    </td>
-                    <td>IN RE: Estate of ROBERT T SMITH, Decedent</td>
-                    <td>Safe Deposit Box</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-07/25/1985                    </td>
-                </tr>
-                <tr>
-                    <td>29.</td>
-                    <td class="colCaseNumber">
-                        1985-CP-000398-S
-                    </td>
-                    <td>IN RE: Estate of ROBERT T SMITH, Decedent</td>
-                    <td>Will for Safekeeping</td>
-                    <td>
-                    </td>
-                    <td> </td>
-                    <td>
-07/25/1985                    </td>
-                </tr>
-                <tr>
-                    <td>30.</td>
-                    <td class="colCaseNumber">
-                        1983-CP-000467-S
-                    </td>
-                    <td>IN RE: Estate of ROBERT LAWRENCE SMITH, Decedent</td>
-                    <td>Will for Safekeeping</td>
-                    <td>
-                    </td>
-                    <td> </td>
-                    <td>
-09/02/1983                    </td>
-                </tr>
-                <tr>
-                    <td>31.</td>
-                    <td class="colCaseNumber">
-                        1981-CP-000656-O
-                    </td>
-                    <td>IN RE: Estate of ROBERT W SMITH, Decedent</td>
-                    <td>Formal Administration</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-05/19/1981                    </td>
-                </tr>
-                <tr>
-                    <td>32.</td>
-                    <td class="colCaseNumber">
-                        1978-CP-001283-O
-                    </td>
-                    <td>IN RE: Estate of ROBERT N SMITH, Decedent</td>
-                    <td>Formal Administration</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-07/27/1978                    </td>
-                </tr>
-                <tr>
-                    <td>33.</td>
-                    <td class="colCaseNumber">
-                        1977-CP-001802-O
-                    </td>
-                    <td>IN RE: Estate of ROBERT JOHNSON SMITH, Decedent</td>
-                    <td>Formal Administration</td>
-                    <td>
-                    </td>
-                    <td>Alice L Blackwell</td>
-                    <td>
-11/03/1977                    </td>
-                </tr>
-                <tr>
-                    <td>34.</td>
-                    <td class="colCaseNumber">
-                        1975-CP-000410-S
-                    </td>
-                    <td>IN RE: Estate of ROBERT M SMITH, Decedent</td>
-                    <td>Will for Safekeeping</td>
-                    <td>
-                    </td>
-                    <td> </td>
-                    <td>
-10/08/1975                    </td>
-                </tr>
-        </tbody>
-    </table>
-</div>
-
-            </main>
-        </section>
-    </div>
-    <footer>
-        <div class="footer">
-            <div class="container">
-                <div class="col-md-3 col-md-offset-1">
-                    <div class="panel-title">
-                        Help & Support
-                    </div>
-                    <a href="/Home/FAQ">FAQ</a><br />
-                    <a href="/Home/GlossaryOfTerms">Glossary of Terms</a><br />
-                    <a href="https://www.myorangeclerk.com/Misc-Pages/Contact-Us">Contact Support<br /></a>
-                    <a href="https://myorangeclerk.com/Misc-Pages/Privacy-Statement?pagesection=Privacy Statement">View Our Privacy Statement<br /></a>
-
-                </div>
-                <div class="col-md-4 text-center" style="margin-top:-20px;">
-
-                    <a href="/home/index"> <img class="logo-box" src="/Images/MyEclerkLogoShadow.png" alt="my eclerk logo" /></a><br />
-                    <small>
+					<a href="/home/index">
+						<img class="logo-box" src="/Images/MyEclerkLogoShadow.png" alt="my eclerk logo" /></a><br />
+						<small>
                         © Copyright 2022 Orange County Clerk of Courts <br />
                         All rights reserved <br />
                         Build V. 2.8.5.1   <br />
                         
                     </small>
 
+				</div>
+				<div class="col-md-2 col-md-offset-1 ">
+					<div class="panel-title">
+						Follow Us...
+					</div>
+					<a href="http://twitter.com/orangeclerk"> <span class="social social-twitter"></span> Twitter</a>
+					<br />
+					<a
+						href="http://facebook.com/pages/orlando-Florida/Orange-County-Clerk-Of-Courts/186708240483?ref=ts"><span class="social social-facebook"></span>
+						Facebook</a> <br />
+					<a href="https://app.e2ma.net/app2/audience/signup/71567/40188/?v=a"><span class="glyphicons glyphicons-envelope"></span>
+						Newsletter Email</a> <br />
                 </div>
-                <div class="col-md-2 col-md-offset-1 ">
-                    <div class="panel-title">
-                        Follow Us...
-                    </div>
-                    <a href="http://twitter.com/orangeclerk"> <span class="social social-twitter"></span> Twitter</a> <br />
-                    <a href="http://facebook.com/pages/orlando-Florida/Orange-County-Clerk-Of-Courts/186708240483?ref=ts"><span class="social social-facebook"></span> Facebook</a> <br />
-                    <a href="https://app.e2ma.net/app2/audience/signup/71567/40188/?v=a"><span class="glyphicons glyphicons-envelope"></span> Newsletter Email</a> <br />
-                </div>
-            </div>
-        </div>
-        <script>
-    $(document).ready(function () {
+				</div>
+			</div>
+			<script>
+				$(document).ready(function () {
        
         var TimeOutValue = 0 * 60000;
         if(TimeOutValue > 0)
@@ -1610,19 +415,20 @@ Deceased</td>
         //    }, 3000);
         //}
     });
-</script>
+			</script>
 
-    </footer>
-    <script src="/bundles/jqueryval?v=tbCA1UoE62X7WPrB5lldRIGebkQepUuA4izLhZGKxR41"></script>
+	</footer>
+	<script src="/bundles/jqueryval?v=tbCA1UoE62X7WPrB5lldRIGebkQepUuA4izLhZGKxR41"></script>
 
-    <script src="/bundles/bootstrap?v=NzP9D5jO6GVMzY8_4Kfk811W0VrrhYdC5doOJzjbWJc1"></script>
+	<script src="/bundles/bootstrap?v=NzP9D5jO6GVMzY8_4Kfk811W0VrrhYdC5doOJzjbWJc1"></script>
 
-    <script src="/bundles/customjs?v=OezqSEQA_anUgicPYRrsmNGji4G11dtNAOQCk62aGmE1"></script>
+	<script src="/bundles/customjs?v=OezqSEQA_anUgicPYRrsmNGji4G11dtNAOQCk62aGmE1"></script>
 
-    <script src="/Scripts/mvcfoolproof.unobtrusive.min.js"></script>
-    <script src="/Scripts/site.js"></script>
-    <script src="/Scripts/bootstrap-multiselect.js"></script>
-    
+	<script src="/Scripts/mvcfoolproof.unobtrusive.min.js"></script>
+	<script src="/Scripts/site.js"></script>
+	<script src="/Scripts/bootstrap-multiselect.js"></script>
+
 
 </body>
+
 </html>
